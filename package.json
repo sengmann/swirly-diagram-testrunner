@@ -1,0 +1,29 @@
+{
+  "name": "swirly-diagram-testrunner",
+  "version": "0.0.0",
+  "description": "Testrunner that runs observables and prepares diagram generation for swirly",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/lodash": "^4.14.157",
+    "@types/mocha": "^7.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "ts-node": "^8.10.2",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "@swirly/parser": "^0.14.2",
+    "@swirly/renderer-node": "^0.14.2",
+    "@swirly/theme-default-light": "^0.14.0",
+    "@swirly/types": "^0.14.0",
+    "lodash": "^4.17.15",
+    "rxjs": "^6.6.0"
+  }
+}
