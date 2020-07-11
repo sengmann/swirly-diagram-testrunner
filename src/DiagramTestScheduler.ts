@@ -1,7 +1,7 @@
 import { TestScheduler } from 'rxjs/testing';
 import { TestStream } from './types';
 import { RunHelpers } from 'rxjs/internal/testing/TestScheduler';
-import { DiagramSpecification } from '@swirly/types/dist';
+import { DiagramSpecification } from '@swirly/types';
 import { toStreamSpec } from '@swirly/parser/dist/spec/stream';
 import { toOperatorSpec } from '@swirly/parser/dist/spec/operator';
 import { styles } from '@swirly/theme-default-light';
