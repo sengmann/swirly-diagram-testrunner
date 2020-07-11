@@ -5,7 +5,9 @@ The [Swirly](https://github.com/timdp/swirly) library is used to generate the di
 
 At the moment it can only be used with Chai. In the future other assertion libraries will be supported.
 
+
 ## Example unit test
+![Exampe](./doc/diagram/filter.svg)
 
 ```typescript
 import { DiagramTestScheduler } from "swirly-diagram-testrunner"

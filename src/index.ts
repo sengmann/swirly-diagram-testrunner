@@ -1,33 +1,45 @@
 import "mocha"
-import { filter } from 'rxjs/operators';
-import { DiagramTestScheduler } from './DiagramTestScheduler';
-import { DiagramSpecification } from '@swirly/types';
-import { renderMarbleDiagram } from '@swirly/renderer-node';
-import { styles } from '@swirly/theme-default-light';
+import fs from "fs";
+import { filter } from "rxjs/operators";
+import { DiagramTestScheduler } from "./DiagramTestScheduler";
+import { DiagramSpecification } from "@swirly/types";
+import { renderMarbleDiagram } from "@swirly/renderer-node";
+import path from 'path';
 
-export { DiagramTestScheduler } from './DiagramTestScheduler';
-export * from './types'
+export { DiagramTestScheduler } from "./DiagramTestScheduler";
+export * from "./types"
 
-describe('DiagramTestScheduler', () => {
+type TitledDiagram = { title: string, diagram: DiagramSpecification }
+
+describe("DiagramTestScheduler", () => {
     let scheduler: DiagramTestScheduler;
-    let diagram: DiagramSpecification;
+    let diagrams: TitledDiagram[] = [];
 
     beforeEach(() => {
         scheduler = new DiagramTestScheduler();
     })
 
-    it('should give a diagram', () => {
-        diagram = scheduler.runAsDiagram('filter(n => n % 2 != 0)', ({ cold, expectObservable }) => {
-            const source = cold<number>("-1-2-3|", { 1: 1, 2: 2, 3: 3 });
+    it("should give a diagram", () => {
+        const filename = "filter.svg"
+        const diagram = scheduler.runAsDiagram("filter(n => n % 2 != 0)", ({ cold, expectObservable }) => {
+            const source = cold<number>("--1--2--3|", { 1: 1, 2: 2, 3: 3 });
             const testee = source.pipe(filter(n => n % 2 !== 0));
 
-            expectObservable(testee).toBe("-1---3|", { 1: 1, 3: 3 })
+            expectObservable(testee).toBe("--1-----3|", { 1: 1, 3: 3 })
         })
-        console.log("diagram %o", diagram);
+
+        diagrams.push({ title: filename, diagram });
+
     });
 
-    afterEach(() => {
-        const r = renderMarbleDiagram(diagram, { styles })
-        console.log(r.xml);
+    after(async () => {
+        return Promise.all(
+            diagrams.map(d => fs.writeFile(
+                path.resolve(__dirname, "../doc/diagram" ,d.title),
+                renderMarbleDiagram(d.diagram).xml, (e) => {
+                    console.log("e", e);
+                })
+            )
+        )
     })
 })
