@@ -3,4 +3,5 @@
 /.idea
 *.iws
 out/
+dist/
 tmp/
