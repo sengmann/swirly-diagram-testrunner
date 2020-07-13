@@ -1,5 +1,5 @@
-import { TestMessage } from '@swirly/parser-rxjs/dist';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { TestMessage } from "@swirly/parser-rxjs/dist";
+import { ColdObservable } from "rxjs/internal/testing/ColdObservable";
 
 export interface TestStream {
     messages: TestMessage[];

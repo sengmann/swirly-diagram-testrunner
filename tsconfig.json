@@ -12,7 +12,8 @@
     "noEmitOnError": false,
     "noImplicitAny": true,
     "strict": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "rootDirs": [

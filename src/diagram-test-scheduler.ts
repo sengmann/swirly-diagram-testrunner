@@ -16,7 +16,7 @@ export class DiagramTestScheduler extends TestScheduler {
         super((actual: any, expected: any) => {
             if (Array.isArray(actual) && Array.isArray(expected)) {
                 this.outputStreams.push({ messages: actual.map(m => scaleTestMessageTime(m, 10)), subscription: { start: 0, end: "100%" } });
-                const failureMessage = `\nExpected\n${actual.map(a => `\t${JSON.stringify(a)}`).join("\n")}\t\nto deep equal\n${expected.map(e => `\t${JSON.stringify(e)}`).join("\n")}`
+                const failureMessage = `\nExpected\n${actual.map(a => `\t${JSON.stringify(a)}`).join("\n")}\t\nto deep equal\n${expected.map(e => `\t${JSON.stringify(e)}`).join("\n")}`;
                 assert.deepEqual(deleteErrorNotificationStack(actual), deleteErrorNotificationStack(expected), failureMessage);
             } else {
                 assert.deepEqual(actual, expected);
@@ -26,36 +26,36 @@ export class DiagramTestScheduler extends TestScheduler {
 
     runAsDiagram<T>(operatorTitle: string, fn: (helpers: RunHelpers) => T): DiagramSpecification {
         return this.run(helpers => {
-            fn(helpers)
+            fn(helpers);
             this.inputStreams = this.getHotTestStream().concat(this.getColdTestStream());
             this.flush();
             this.inputStreams = updateInputStreamsPostFlush(this.inputStreams);
 
-            const inputs = this.inputStreams.map(s => toStreamSpec(s.messages))
+            const inputs = this.inputStreams.map(s => toStreamSpec(s.messages));
             const operator = toOperatorSpec(operatorTitle);
-            const outputs = this.outputStreams.map(s => toStreamSpec(s.messages))
+            const outputs = this.outputStreams.map(s => toStreamSpec(s.messages));
 
-            return { content: [...inputs, operator, ...outputs], styles }
-        })
+            return { content: [...inputs, operator, ...outputs], styles };
+        });
     }
 
     private getHotTestStream(): TestStream[] {
         return this.hotObservables.map(h => ({
             messages: h.messages.map(m => scaleTestMessageTime(m, 10)),
             subscription: { start: 0, end: "100%" },
-        }))
+        }));
     }
 
     private getColdTestStream(): TestStream[] {
         return this.coldObservables.map(c => ({
             messages: c.messages.map(m => scaleTestMessageTime(m, 10)),
             cold: c
-        }))
+        }));
     }
 }
 
 export function scaleTestMessageTime(testMessage: TestMessage, factor: number): TestMessage {
-    return { ...testMessage, frame: testMessage.frame * factor }
+    return { ...testMessage, frame: testMessage.frame * factor };
 }
 
 export function updateInputStreamsPostFlush(inputStreams: TestStream[]) {
