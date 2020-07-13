@@ -1,3 +1,3 @@
-export { DiagramTestScheduler } from "./DiagramTestScheduler";
+export { DiagramTestScheduler } from "./diagram-test-scheduler";
 export * from "./types"
 

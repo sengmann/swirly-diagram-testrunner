@@ -1,4 +1,4 @@
-import { DiagramTestScheduler } from "./DiagramTestScheduler";
+import { DiagramTestScheduler } from "./diagram-test-scheduler";
 import { filter } from "rxjs/operators";
 import fs from "fs";
 import path from "path";
