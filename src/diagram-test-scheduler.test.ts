@@ -35,8 +35,6 @@ describe("DiagramTestScheduler", () => {
             expectObservable(output).toBe("-(b|)");
         });
 
-        console.log(JSON.stringify(diagram.content));
-
         expect(diagram.content).to.be.a("array").and.have.lengthOf(4);
         expect(diagram.content[0]).to.have.ownProperty("kind").and.equals("S");
         expect(diagram.content[1]).to.have.ownProperty("kind").and.equals("S");
