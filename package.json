@@ -1,15 +1,26 @@
 {
   "name": "swirly-diagram-testrunner",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Testrunner that runs observables and prepares diagram generation for swirly",
-  "main": "index.js",
+  "main": "dist/esm2015/index.js",
   "scripts": {
     "test": "TS_NODE_CACHE=false && mocha --opts spec/mocha.opts src/**/*test.ts",
     "clean": "del-cli dist",
     "build": "npm run clean ; tsc -p tsconfig.json && tsc -p tsconfig.dist.esm5.json && tsc -p tsconfig.dist.esm2015.json"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Sascha Engmann",
+  "homepage": "https://github.com/sengmann/swirly-diagram-testrunner#swirly-diagram-testrunner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sengmann/swirly-diagram-testrunner"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "RxJS",
+    "Swirly",
+    "marbles",
+    "diagram"
+  ],
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/lodash": "^4.14.157",
