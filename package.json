@@ -27,7 +27,7 @@
     "@swirly/renderer-node": "^0.14.2",
     "@swirly/theme-default-light": "^0.14.0",
     "@swirly/types": "^0.14.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "rxjs": "^6.6.0"
   }
 }
