@@ -38,5 +38,4 @@ describe('DiagramTestScheduler', () => {
         console.log(r.xml);
     })
 })
-
 ```
