@@ -1,10 +1,10 @@
 import { TestScheduler } from "rxjs/testing";
 import { TestStream } from "./types";
 import { RunHelpers } from "rxjs/internal/testing/TestScheduler";
-import { DiagramSpecification } from "@swirly/types";
+import { DiagramSpecification, DiagramStyles } from "@swirly/types";
 import { toStreamSpec } from "@swirly/parser/dist/spec/stream";
 import { toOperatorSpec } from "@swirly/parser/dist/spec/operator";
-import { styles } from "@swirly/theme-default-light";
+import { styles as defaultStyles } from "@swirly/theme-default-light";
 import { assert } from "chai";
 import { TestMessage } from "rxjs/internal/testing/TestMessage";
 
@@ -24,7 +24,7 @@ export class DiagramTestScheduler extends TestScheduler {
         });
     }
 
-    runAsDiagram<T>(operatorTitle: string, fn: (helpers: RunHelpers) => T): DiagramSpecification {
+    runAsDiagram<T>(operatorTitle: string, fn: (helpers: RunHelpers) => T, styles: DiagramStyles = defaultStyles): DiagramSpecification {
         return this.run(helpers => {
             fn(helpers);
             this.inputStreams = this.getHotTestStream().concat(this.getColdTestStream());

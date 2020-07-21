@@ -1,6 +1,6 @@
 {
   "name": "swirly-diagram-testrunner",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Testrunner that runs observables and prepares diagram generation for swirly",
   "main": "dist/esm2015/index.js",
   "files": [
