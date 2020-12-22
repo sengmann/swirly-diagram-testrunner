@@ -2,8 +2,7 @@ import { TestScheduler } from "rxjs/testing";
 import { TestStream } from "./types";
 import { RunHelpers } from "rxjs/internal/testing/TestScheduler";
 import { DiagramSpecification, DiagramStyles } from "@swirly/types";
-import { toStreamSpec } from "@swirly/parser/dist/spec/stream";
-import { toOperatorSpec } from "@swirly/parser/dist/spec/operator";
+import { createOperatorSpecification, createStreamSpecification } from "@swirly/parser";
 import { styles as defaultStyles } from "@swirly/theme-default-light";
 import { assert } from "chai";
 import { TestMessage } from "rxjs/internal/testing/TestMessage";
@@ -31,9 +30,9 @@ export class DiagramTestScheduler extends TestScheduler {
             this.flush();
             this.inputStreams = updateInputStreamsPostFlush(this.inputStreams);
 
-            const inputs = this.inputStreams.map(s => toStreamSpec(s.messages));
-            const operator = toOperatorSpec(operatorTitle);
-            const outputs = this.outputStreams.map(s => toStreamSpec(s.messages));
+            const inputs = this.inputStreams.map(s => createStreamSpecification(s.messages));
+            const operator = createOperatorSpecification(operatorTitle);
+            const outputs = this.outputStreams.map(s => createStreamSpecification(s.messages));
 
             return { content: [...inputs, operator, ...outputs], styles };
         });
