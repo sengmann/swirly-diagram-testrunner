@@ -1,6 +1,6 @@
 # Swirly Diagram Testrunner
 
-Provides an easy to use way to generate a marble diagram from unit tests. 
+Provides an easy-to-use way to generate a marble diagram from unit tests. 
 The [Swirly](https://github.com/timdp/swirly) library is used to generate the diagrams.
 
 At the moment it can only be used with Chai. In the future other assertion libraries will be supported.
