@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.1
+Use Node util.inspect to render values in the diagrams.
+
 ## 0.3.0
 Use JSON.stringify() to render values in the diagrams.
 

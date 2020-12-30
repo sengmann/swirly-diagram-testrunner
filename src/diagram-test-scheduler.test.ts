@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { concat } from "rxjs";
 import { tap } from "rxjs/operators";
 import { StreamSpecification } from "@swirly/types";
+import * as util from "util";
 
 describe("DiagramTestScheduler", () => {
     it("should execute fn passed to runAsDiagram", () => {
@@ -44,7 +45,7 @@ describe("DiagramTestScheduler", () => {
         expect(diagram.content[3]).to.have.ownProperty("kind").and.equals("S");
     });
 
-    it("should render objects with JSON.stringify instead of [object object]", () => {
+    it("should render objects with util.inspect instead of [object object]", () => {
         const scheduler = new DiagramTestScheduler();
         const tapTitle = "tap";
         const a = { foo: "bar" };
@@ -57,7 +58,7 @@ describe("DiagramTestScheduler", () => {
         expect(diagram.content).to.be.a("array").and.have.length(3);
         expect(diagram.content[0]).to.haveOwnProperty("messages");
         expect((diagram.content[0] as StreamSpecification).messages).to.be.a("array");
-        expect(((diagram.content[0] as StreamSpecification).messages[0].notification as any).value).to.eq(JSON.stringify(a));
+        expect(((diagram.content[0] as StreamSpecification).messages[0].notification as any).value).to.eq(util.inspect(a));
     });
 
     it("should render arrays as intended", () => {

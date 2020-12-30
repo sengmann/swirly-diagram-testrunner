@@ -6,6 +6,7 @@ import { createOperatorSpecification, createStreamSpecification } from "@swirly/
 import { styles as defaultStyles } from "@swirly/theme-default-light";
 import { assert } from "chai";
 import { TestMessage } from "rxjs/internal/testing/TestMessage";
+import * as util from "util";
 
 export class DiagramTestScheduler extends TestScheduler {
     inputStreams: TestStream[] = [];
@@ -86,6 +87,6 @@ export function stringifyTestMessage(message: TestMessage): TestMessage {
         ? message
         : {
             ...message,
-            notification: { ...message.notification, value: JSON.stringify(message.notification.value) }
+            notification: { ...message.notification, value: util.inspect(message.notification.value) }
         } as any;
 }
