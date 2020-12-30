@@ -46,7 +46,7 @@ describe("DiagramTestScheduler", () => {
 
     it("should render objects with JSON.stringify instead of [object object]", () => {
         const scheduler = new DiagramTestScheduler();
-        const tapTitle = "tab";
+        const tapTitle = "tap";
         const a = { foo: "bar" };
         const diagram = scheduler.runAsDiagram(tapTitle, ({ cold, expectObservable }) => {
             const input = cold("a|", { a });
@@ -54,10 +54,24 @@ describe("DiagramTestScheduler", () => {
             const output = input.pipe(tap());
             expectObservable(output).toBe("a|", { a });
         });
-        console.log("JSON.stringify(diagram.content)", JSON.stringify(diagram.content));
         expect(diagram.content).to.be.a("array").and.have.length(3);
         expect(diagram.content[0]).to.haveOwnProperty("messages");
         expect((diagram.content[0] as StreamSpecification).messages).to.be.a("array");
         expect(((diagram.content[0] as StreamSpecification).messages[0].notification as any).value).to.eq(JSON.stringify(a));
+    });
+
+    it("should render arrays as intended", () => {
+        const scheduler = new DiagramTestScheduler();
+        const tapTitle = "tap";
+        const a = [1, "2", {}];
+        const diagram = scheduler.runAsDiagram(tapTitle, ({ cold, expectObservable }) => {
+            const input = cold("a|", {a});
+
+            const output = input.pipe(tap());
+            expectObservable(output).toBe("a|", { a });
+        });
+        expect(diagram.content).to.be.a("array").and.have.length(3);
+        expect(diagram.content[0]).to.haveOwnProperty("messages");
+        expect((diagram.content[0] as StreamSpecification).messages).to.be.a("array");
     });
 });
