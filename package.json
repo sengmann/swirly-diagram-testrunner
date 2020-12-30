@@ -1,6 +1,6 @@
 {
   "name": "swirly-diagram-testrunner",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Testrunner that runs observables and prepares diagram generation for swirly",
   "main": "dist/esm2015/index.js",
   "files": [
@@ -38,7 +38,7 @@
     "tslint": "^6.1.2",
     "typescript": "^3.9.6"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@swirly/parser": "^0.15.2",
     "@swirly/renderer-node": "^0.15.2",
     "@swirly/theme-default-light": "^0.15.2",

@@ -30,9 +30,9 @@ export class DiagramTestScheduler extends TestScheduler {
             this.flush();
             this.inputStreams = updateInputStreamsPostFlush(this.inputStreams);
 
-            const inputs = this.inputStreams.map(s => createStreamSpecification(s.messages));
+            const inputs = this.inputStreams.map(s => createStreamSpecification(s.messages.map(stringifyTestMessage)));
             const operator = createOperatorSpecification(operatorTitle);
-            const outputs = this.outputStreams.map(s => createStreamSpecification(s.messages));
+            const outputs = this.outputStreams.map(s => createStreamSpecification(s.messages.map(stringifyTestMessage)));
 
             return { content: [...inputs, operator, ...outputs], styles };
         });
@@ -79,4 +79,13 @@ export function deleteErrorNotificationStack(marble: any) {
         }
     }
     return marble;
+}
+
+export function stringifyTestMessage(message: TestMessage): TestMessage {
+    return message.isGhost || !message.notification.hasValue
+        ? message
+        : {
+            ...message,
+            notification: { ...message.notification, value: JSON.stringify(message.notification.value) }
+        } as any;
 }
